@@ -178,46 +178,121 @@
 <div class="last-updated" id="lastUpdated"></div>
 
 <script>
+// ── Static provider list (70 home care providers near Delahey) ───────────────
 const PROVIDERS = [{"name":"Filipino CACP Program","provider":"Filipino Community Council of Victoria Inc","suburb":"BROOKLYN","postcode":"3012","lga":"Brimbank"},{"name":"At Your Service Home Care","provider":"Primary Caring Pty Ltd","suburb":"DEER PARK","postcode":"3023","lga":"Brimbank"},{"name":"My Home Care Choices","provider":"My Home Care Choices Pty Ltd","suburb":"DEER PARK","postcode":"3023","lga":"Brimbank"},{"name":"IPC HEALTH LTD","provider":"IPC Health Ltd","suburb":"ST ALBANS","postcode":"3021","lga":"Brimbank"},{"name":"IPC HEALTH LTD","provider":"IPC Health Ltd","suburb":"ST ALBANS","postcode":"3021","lga":"Brimbank"},{"name":"Migrant Resource Centre North West Region Inc.","provider":"Migrant Resource Centre North West Region Inc","suburb":"ST ALBANS","postcode":"3021","lga":"Brimbank"},{"name":"Baptcare - Western HCP 2","provider":"Baptcare Ltd","suburb":"SUNSHINE","postcode":"3020","lga":"Brimbank"},{"name":"Baptcare - Western HCP 4","provider":"Baptcare Ltd","suburb":"SUNSHINE","postcode":"3020","lga":"Brimbank"},{"name":"Brotherhood Community Care (Northern)","provider":"Brotherhood of St Laurence","suburb":"SUNSHINE","postcode":"3020","lga":"Brimbank"},{"name":"Brotherhood Community Care Western Metro Region","provider":"Brotherhood of St Laurence","suburb":"SUNSHINE","postcode":"3020","lga":"Brimbank"},{"name":"Brotherhood Of St Laurence Housing Linked - Northern Metro","provider":"Brotherhood of St Laurence","suburb":"SUNSHINE","postcode":"3020","lga":"Brimbank"},{"name":"Supreme Care Pty Ltd","provider":"Supreme Care Pty Ltd","suburb":"SUNSHINE","postcode":"3020","lga":"Brimbank"},{"name":"The Salvation Army, Adult Services, Northern Home Care Packages","provider":"The Salvation Army (Victoria) Property Trust","suburb":"SUNSHINE","postcode":"3020","lga":"Brimbank"},{"name":"The Salvation Army, Adult Services, Southern Home Care Packages","provider":"The Salvation Army (Victoria) Property Trust","suburb":"SUNSHINE","postcode":"3020","lga":"Brimbank"},{"name":"The Salvation Army, Adult Services, Western Home Care Packages","provider":"The Salvation Army (Victoria) Property Trust","suburb":"SUNSHINE","postcode":"3020","lga":"Brimbank"},{"name":"Vision Australia - Sunshine (Melbourne)","provider":"Vision Australia Limited","suburb":"SUNSHINE","postcode":"3020","lga":"Brimbank"},{"name":"Home Care Packages","provider":"Victorian Arabic Social Services Inc.","suburb":"BROADMEADOWS","postcode":"3047","lga":"Hume"},{"name":"Hume City Council CACP Services","provider":"Hume City Council","suburb":"BROADMEADOWS","postcode":"3047","lga":"Hume"},{"name":"MiCare Home Care services WMR","provider":"MiCare Ltd","suburb":"BROADMEADOWS","postcode":"3047","lga":"Hume"},{"name":"Wintringham - Outer Northern Metro Region","provider":"WINTRINGHAM LIMITED","suburb":"BROADMEADOWS","postcode":"3047","lga":"Hume"},{"name":"Auscare Victoria Aged Care","provider":"Ausgroup Victoria Aged Care Pty Ltd","suburb":"CAMBELLFIELD","postcode":"3061","lga":"Hume"},{"name":"Comfort Care Group Pty Ltd","provider":"Comfort Care Group Pty Ltd","suburb":"CAMPBELLFIELD","postcode":"3061","lga":"Hume"},{"name":"Bloom Community Care","provider":"Pearl Home Care Pty Ltd","suburb":"CRAIGIEBURN","postcode":"3064","lga":"Hume"},{"name":"Miracle Services Pty Ltd trading as Miracle Health Services","provider":"Miracle Services Acts Pty Ltd","suburb":"CRAIGIEBURN","postcode":"3064","lga":"Hume"},{"name":"Spectrum Migrant Resource Centre Inc","provider":"Spectrum Migrant Resource Centre Inc","suburb":"DALLAS","postcode":"3047","lga":"Hume"},{"name":"Pearl Home Care Melbourne North","provider":"Pearl Home Care Pty Ltd","suburb":"GLADSTONE PARK","postcode":"3043","lga":"Hume"},{"name":"People First Healthcare","provider":"People First Healthcare Pty Limited","suburb":"ROXBURGH PARK","postcode":"3064","lga":"Hume"},{"name":"Nurse Next Door Sunbury","provider":"Australian Home Healthcare Services Pty Ltd","suburb":"SUNBURY","postcode":"3429","lga":"Hume"},{"name":"Sunbury Community Health Centre","provider":"Sunbury Community Health Centre","suburb":"SUNBURY","postcode":"3429","lga":"Hume"},{"name":"Esse Care","provider":"Coburg Aged Care Pty Ltd","suburb":"TULLAMARINE","postcode":"3043","lga":"Hume"},{"name":"Benetas EACH Western","provider":"Anglican Aged Care Services Group","suburb":"BRAYBROOK","postcode":"3019","lga":"Maribyrnong"},{"name":"Vietnamese HCPs Western Metro","provider":"Australian Vietnamese Women's Association","suburb":"BRAYBROOK","postcode":"3019","lga":"Maribyrnong"},{"name":"About Pearl Home Care Bendigo","provider":"Pearl Home Care Pty Ltd","suburb":"FOOTSCRAY","postcode":"3011","lga":"Maribyrnong"},{"name":"Doutta Galla West Home Care","provider":"Doutta Galla Aged Services Ltd","suburb":"FOOTSCRAY","postcode":"3011","lga":"Maribyrnong"},{"name":"Just Better Care Melbourne West","provider":"Just Better Care Australia Pty Ltd","suburb":"FOOTSCRAY","postcode":"3011","lga":"Maribyrnong"},{"name":"Pearl Home Care Melbourne Central","provider":"Pearl Home Care Pty Ltd","suburb":"FOOTSCRAY","postcode":"3011","lga":"Maribyrnong"},{"name":"Uniting AgeWell North West Metro Home Care","provider":"Uniting Agewell Limited","suburb":"KINGSVILLE","postcode":"3012","lga":"Maribyrnong"},{"name":"Uniting AgeWell North West Metro Home Care UVT","provider":"Uniting Agewell Limited","suburb":"KINGSVILLE","postcode":"3012","lga":"Maribyrnong"},{"name":"Australian Multicultural Community Services","provider":"Australian Multicultural Community Services Inc","suburb":"MAIDSTONE","postcode":"3012","lga":"Maribyrnong"},{"name":"Australian Multicultural Community Services","provider":"Australian Multicultural Community Services Inc","suburb":"MAIDSTONE","postcode":"3012","lga":"Maribyrnong"},{"name":"Australian Multicultural Community Services","provider":"Australian Multicultural Community Services Inc","suburb":"MAIDSTONE","postcode":"3012","lga":"Maribyrnong"},{"name":"Australian Multicultural Community Services","provider":"Australian Multicultural Community Services Inc","suburb":"MAIDSTONE","postcode":"3012","lga":"Maribyrnong"},{"name":"Australian Multicultural Community Services","provider":"Australian Multicultural Community Services Inc","suburb":"MAIDSTONE","postcode":"3012","lga":"Maribyrnong"},{"name":"Australian Multicultural Community Services","provider":"Australian Multicultural Community Services Inc","suburb":"MAIDSTONE","postcode":"3102","lga":"Maribyrnong"},{"name":"CELAS Community Aged Care Packages","provider":"United-Spanish Latin American Welfare Centre Inc.","suburb":"MAIDSTONE","postcode":"3012","lga":"Maribyrnong"},{"name":"Dovida Melbourne Maidstone & Western Suburbs","provider":"Sawinaro Pty Ltd","suburb":"MAIDSTONE","postcode":"3012","lga":"Maribyrnong"},{"name":"Jim's Home Care","provider":"Jim's Home Care Pty Ltd","suburb":"MAIDSTONE","postcode":"3012","lga":"Maribyrnong"},{"name":"Wintringham - Western Metro Region","provider":"WINTRINGHAM LIMITED","suburb":"SEDDON","postcode":"3011","lga":"Maribyrnong"},{"name":"Gold Star Home and Community Services Pty Ltd","provider":"GOLD STAR HOME CARE AND COMMUNITY SERVICES PTY LTD","suburb":"TOTTENHAM","postcode":"3012","lga":"Maribyrnong"},{"name":"annecto CACP - Western Metropolitan Region","provider":"Annecto Inc","suburb":"YARRAVILLE","postcode":"3013","lga":"Maribyrnong"},{"name":"annecto EACH - Western Metropolitan Region","provider":"Annecto Inc","suburb":"YARRAVILLE","postcode":"3013","lga":"Maribyrnong"},{"name":"Melbourne Community Home Care Service","provider":"Community Home Care Pty Ltd","suburb":"FRASER RISE","postcode":"3336","lga":"Melton"},{"name":"Haisey Home Care Service","provider":"Haisey Home Care Service Pty Ltd","suburb":"RAVENHALL","postcode":"3023","lga":"Melton"},{"name":"BrightCare Support Pty Ltd","provider":"Brightcare Support Pty Ltd","suburb":"STRATHTULLOH","postcode":"3338","lga":"Melton"},{"name":"Empower Home Care Pty Ltd","provider":"Empower Home Care Pty Ltd","suburb":"ASCOT VALE","postcode":"3032","lga":"Moonee Valley"},{"name":"Inclusive Home Care Pty Ltd","provider":"Inclusive Home Care Pty Ltd","suburb":"ASCOT VALE","postcode":"3032","lga":"Moonee Valley"},{"name":"Wintringham - Eastern Metro Region","provider":"WINTRINGHAM LIMITED","suburb":"ASCOT VALE","postcode":"3032","lga":"Moonee Valley"},{"name":"Wintringham - Northern Metro Region","provider":"WINTRINGHAM LIMITED","suburb":"ASCOT VALE","postcode":"3032","lga":"Moonee Valley"},{"name":"NEW CARE SERVICES LTD","provider":"New Care Services Ltd","suburb":"ESSENDON","postcode":"3040","lga":"Moonee Valley"},{"name":"Care Connect  - Housing Linked","provider":"Care Connect Ltd","suburb":"MOONEE PONDS","postcode":"3039","lga":"Moonee Valley"},{"name":"Care Connect  - Total Western Metro General Packages","provider":"Care Connect Ltd","suburb":"MOONEE PONDS","postcode":"3039","lga":"Moonee Valley"},{"name":"Care Connect - General West Metro","provider":"Care Connect Ltd","suburb":"MOONEE PONDS","postcode":"3039","lga":"Moonee Valley"},{"name":"Care Connect - Northern EACH","provider":"Care Connect Ltd","suburb":"MOONEE PONDS","postcode":"3039","lga":"Moonee Valley"},{"name":"Care Connect CACP Service - Northern Region","provider":"Care Connect Ltd","suburb":"MOONEE PONDS","postcode":"3039","lga":"Moonee Valley"},{"name":"Care Connect Western Region EACH Services","provider":"Care Connect Ltd","suburb":"MOONEE PONDS","postcode":"3039","lga":"Moonee Valley"},{"name":"Challenge Facility Management Pty Ltd","provider":"Challenge Facility Management Pty Ltd","suburb":"MOONEE PONDS","postcode":"3039","lga":"Moonee Valley"},{"name":"City Of Moonee Valley Care Packages","provider":"Moonee Valley City Council","suburb":"MOONEE PONDS","postcode":"3039","lga":"Moonee Valley"},{"name":"HammondCare At Home Western Melbourne","provider":"HammondCare","suburb":"MELBOURNE","postcode":"3000","lga":"Melbourne"},{"name":"HenderCare CHSP VIC","provider":"HenderCare","suburb":"MELBOURNE","postcode":"3000","lga":"Melbourne"},{"name":"Silverchain Western Melbourne","provider":"Silverchain","suburb":"MELBOURNE","postcode":"3000","lga":"Melbourne"}];
 
 const MATCH_RULES = [
-  { terms:['ipchealth','ipc health','ipc health ltd'], status:'no-capacity', label:'❌ No Capacity', date:'1 May 2026', note:'At capacity — cannot accept new referrals (Carol Segran).' },
-  { terms:['hammondcare','hammond care'], status:'no-capacity', label:'❌ No Capacity', date:'30 Apr 2026', note:'Overcapacity for domestic assistance under CHSP.' },
-  { terms:['mecwacare','mecwa'], status:'no-capacity', label:'❌ No Capacity', date:'30 Apr 2026', note:'Not funded for home maintenance in Delahey; no DA capacity.' },
-  { terms:['silverchain'], status:'no-capacity', label:'❌ No Capacity', date:'3 May 2026', note:'No capacity in Delahey area — CHSP team confirmed.' },
-  { terms:['doutta galla','doutta galla aged'], status:'no-capacity', label:'❌ No Capacity', date:'6 May 2026', note:'At capacity — Nancy placed on long waitlist (Trudy Grima, Community Coordinator).' },
-  { terms:['australian multicultural community services','amcservices'], status:'no-capacity', label:'❌ No Capacity', date:'6 May 2026', note:'No capacity in west Melbourne for Domestic Assistance and Home Maintenance.' },
-  { terms:['careconnect','care connect'], status:'no-capacity', label:'❌ No Capacity', date:'5 May 2026', note:'Full capacity for Domestic Assistance and Home Maintenance under CHSP.' },
-  { terms:['pearlhomecare','pearl home care'], status:'no-capacity', label:'❌ No Capacity', date:'5 May 2026', note:'Unable to support CHSP clients — no funding allocation for these categories.' },
-  { terms:['baptcare'], status:'no-capacity', label:'❌ No Capacity', date:'6 May 2026', note:'No capacity for CHSP services at this time.' },
-  { terms:['filipinocommunitycouncil','fccvi','filipino cacp','filipino community council'], status:'no-capacity', label:'❌ No Capacity', date:'6 May 2026', note:'CHSP/SAH provider but does not offer DA or Home Maintenance (Ann Suan, FCCVI).' },
-  { terms:['hendercare'], status:'not-chsp', label:'🚫 Not CHSP', date:'30 Apr 2026', note:'Not open for CHSP referrals in VIC (Simon Kent).' },
-  { terms:['essecare','esse care','coburg aged care'], status:'not-chsp', label:'🚫 Not CHSP', date:'3 May 2026', note:'Confirmed not a CHSP provider (Melissa Yang, Intake).' },
-  { terms:['salvationarmy','salvation army'], status:'not-chsp', label:'🚫 Not CHSP', date:'3 May 2026', note:'Do not provide CHSP services in Victoria.' },
-  { terms:['supremecare','supreme care'], status:'not-chsp', label:'🚫 Not CHSP', date:'5 May 2026', note:'Not registered for CHSP — Support at Home provider only.' },
-  { terms:['myhomecarechoices','my home care choices'], status:'not-chsp', label:'🚫 Not CHSP', date:'5 May 2026', note:'SAH provider only, not a CHSP provider (Ibrahim M, MHCC).' },
-  { terms:['brightcare','bcsupport','brightcare support'], status:'not-chsp', label:'🚫 Not CHSP', date:'6 May 2026', note:'Do not provide services under CHSP.' },
-  { terms:['empowerhomecare','empower home care'], status:'not-chsp', label:'🚫 Not CHSP', date:'6 May 2026', note:'Home care provider only — do not deliver CHSP services.' },
-  { terms:['benetas','anglican aged care'], status:'need-call', label:'📞 Need to Call', date:'3 May 2026', note:'Replied: call CHSP team on 1300 788 338 to check Delahey capacity. No DA offered.' },
-  { terms:['unitingagewell','uniting agewell','uniting agewell limited'], status:'bounced', label:'📧 Bounced', date:'3 May 2026', note:'mcrenquiries@unitingagewell.org bounced — find correct intake address.' },
-  { terms:["jim's home care",'jimshomecare'], status:'bounced', label:'📧 Bounced', date:'5 May 2026', note:'james@jimshomecare.com.au bounced — address not found.' },
-  { terms:['sunbury community health','sunburycobaw'], status:'bounced', label:'📧 Bounced', date:'5 May 2026', note:'intake@sunburycobaw.org.au bounced — address not found.' },
-  { terms:['spectrum migrant','spectrumvic'], status:'bounced', label:'📧 Bounced', date:'5 May 2026', note:'sis.referrals@spectrumvic.org.au bounced — address not found.' },
-  { terms:['peoplefirsthealthcare','people first healthcare','people first healthcare pty'], status:'awaiting', label:'⏳ Awaiting Reply', date:'30 Apr 2026', note:'Emailed 30 Apr — no response yet (6+ days, overdue).' },
-  { terms:['victorian arabic social services','vass.org'], status:'awaiting', label:'⏳ Awaiting Reply', date:'5 May 2026', note:'Emailed 5 May 2026.' },
-  { terms:['comfort care group'], status:'awaiting', label:'⏳ Awaiting Reply', date:'5 May 2026', note:'Emailed 5 May 2026.' },
-  { terms:['miracle health','miracle services'], status:'awaiting', label:'⏳ Awaiting Reply', date:'5 May 2026', note:'Emailed 5 May 2026.' },
-  { terms:['justbettercare','just better care'], status:'awaiting', label:'⏳ Awaiting Reply', date:'5 May 2026', note:'Emailed 5 May 2026.' },
-  { terms:['melbourne community home care','chcservices','community home care pty'], status:'awaiting', label:'⏳ Awaiting Reply', date:'5 May 2026', note:'Emailed 5 May 2026.' },
-  { terms:['celas','united-spanish latin','united spanish latin'], status:'awaiting', label:'⏳ Awaiting Reply', date:'5 May 2026', note:'Emailed 5 May 2026.' },
-  { terms:['haiseyhomecare','haisey home care'], status:'awaiting', label:'⏳ Awaiting Reply', date:'5 May 2026', note:'Emailed 5 May 2026.' },
-  { terms:['inclusivehomecare','inclusive home care'], status:'awaiting', label:'⏳ Awaiting Reply', date:'5 May 2026', note:'Emailed 5 May 2026.' },
-  { terms:['moonee valley city council','mvcc.vic.gov'], status:'awaiting', label:'⏳ Awaiting Reply', date:'5 May 2026', note:'Replied 5 May — acknowledged, passed to Care Partners. Awaiting follow-up.' },
+  // ── No Capacity ──────────────────────────────────────────────────────────────
+  { terms:['ipchealth','ipc health','ipc health ltd'],
+    status:'no-capacity', label:'❌ No Capacity', date:'1 May 2026',
+    note:'At capacity — cannot accept new referrals (Carol Segran).' },
+  { terms:['hammondcare','hammond care'],
+    status:'no-capacity', label:'❌ No Capacity', date:'30 Apr 2026',
+    note:'Overcapacity for domestic assistance under CHSP.' },
+  { terms:['mecwacare','mecwa'],
+    status:'no-capacity', label:'❌ No Capacity', date:'30 Apr 2026',
+    note:'Not funded for home maintenance in Delahey; no DA capacity.' },
+  { terms:['silverchain'],
+    status:'no-capacity', label:'❌ No Capacity', date:'3 May 2026',
+    note:'No capacity in Delahey area — CHSP team confirmed.' },
+  { terms:['doutta galla','doutta galla aged'],
+    status:'no-capacity', label:'❌ No Capacity', date:'6 May 2026',
+    note:'At capacity — Nancy placed on long waitlist (Trudy Grima, Community Coordinator).' },
+  { terms:['australian multicultural community services','amcservices'],
+    status:'no-capacity', label:'❌ No Capacity', date:'6 May 2026',
+    note:'No capacity in west Melbourne for Domestic Assistance and Home Maintenance.' },
+  { terms:['careconnect','care connect'],
+    status:'no-capacity', label:'❌ No Capacity', date:'5 May 2026',
+    note:'Full capacity for Domestic Assistance and Home Maintenance under CHSP.' },
+  { terms:['pearlhomecare','pearl home care'],
+    status:'no-capacity', label:'❌ No Capacity', date:'5 May 2026',
+    note:'Unable to support CHSP clients — no funding allocation for these categories.' },
+  { terms:['baptcare'],
+    status:'no-capacity', label:'❌ No Capacity', date:'6 May 2026',
+    note:'No capacity for CHSP services at this time.' },
+  { terms:['filipinocommunitycouncil','fccvi','filipino cacp','filipino community council'],
+    status:'no-capacity', label:'❌ No Capacity', date:'6 May 2026',
+    note:'CHSP/SAH provider but does not offer DA or Home Maintenance (Ann Suan, FCCVI).' },
+  // ── Not CHSP ─────────────────────────────────────────────────────────────────
+  { terms:['hendercare'],
+    status:'not-chsp', label:'🚫 Not CHSP', date:'30 Apr 2026',
+    note:'Not open for CHSP referrals in VIC (Simon Kent).' },
+  { terms:['essecare','esse care','coburg aged care'],
+    status:'not-chsp', label:'🚫 Not CHSP', date:'3 May 2026',
+    note:'Confirmed not a CHSP provider (Melissa Yang, Intake).' },
+  { terms:['salvationarmy','salvation army'],
+    status:'not-chsp', label:'🚫 Not CHSP', date:'3 May 2026',
+    note:'Do not provide CHSP services in Victoria.' },
+  { terms:['supremecare','supreme care'],
+    status:'not-chsp', label:'🚫 Not CHSP', date:'5 May 2026',
+    note:'Not registered for CHSP — Support at Home provider only.' },
+  { terms:['myhomecarechoices','my home care choices'],
+    status:'not-chsp', label:'🚫 Not CHSP', date:'5 May 2026',
+    note:'SAH provider only, not a CHSP provider (Ibrahim M, MHCC).' },
+  { terms:['brightcare','bcsupport','brightcare support'],
+    status:'not-chsp', label:'🚫 Not CHSP', date:'6 May 2026',
+    note:'Do not provide services under CHSP.' },
+  { terms:['empowerhomecare','empower home care'],
+    status:'not-chsp', label:'🚫 Not CHSP', date:'6 May 2026',
+    note:'Home care provider only — do not deliver CHSP services.' },
+  // ── Need to Call ─────────────────────────────────────────────────────────────
+  { terms:['benetas','anglican aged care'],
+    status:'need-call', label:'📞 Need to Call', date:'3 May 2026',
+    note:'Replied: call CHSP team on 1300 788 338 to check Delahey capacity. No DA offered.' },
+  // ── Bounced ──────────────────────────────────────────────────────────────────
+  { terms:['unitingagewell','uniting agewell','uniting agewell limited'],
+    status:'bounced', label:'📧 Bounced', date:'3 May 2026',
+    note:'mcrenquiries@unitingagewell.org bounced — find correct intake address.' },
+  { terms:["jim's home care",'jimshomecare'],
+    status:'bounced', label:'📧 Bounced', date:'5 May 2026',
+    note:'james@jimshomecare.com.au bounced — address not found.' },
+  { terms:['sunbury community health','sunburycobaw'],
+    status:'bounced', label:'📧 Bounced', date:'5 May 2026',
+    note:'intake@sunburycobaw.org.au bounced — address not found.' },
+  { terms:['spectrum migrant','spectrumvic'],
+    status:'bounced', label:'📧 Bounced', date:'5 May 2026',
+    note:'sis.referrals@spectrumvic.org.au bounced — address not found.' },
+  // ── Awaiting Reply ───────────────────────────────────────────────────────────
+  { terms:['peoplefirsthealthcare','people first healthcare','people first healthcare pty'],
+    status:'awaiting', label:'⏳ Awaiting Reply', date:'30 Apr 2026',
+    note:'Emailed 30 Apr — no response yet (6+ days, overdue).' },
+  { terms:['victorian arabic social services','vass.org'],
+    status:'awaiting', label:'⏳ Awaiting Reply', date:'5 May 2026',
+    note:'Emailed 5 May 2026.' },
+  { terms:['comfort care group'],
+    status:'awaiting', label:'⏳ Awaiting Reply', date:'5 May 2026',
+    note:'Emailed 5 May 2026.' },
+  { terms:['miracle health','miracle services'],
+    status:'awaiting', label:'⏳ Awaiting Reply', date:'5 May 2026',
+    note:'Emailed 5 May 2026.' },
+  { terms:['justbettercare','just better care'],
+    status:'awaiting', label:'⏳ Awaiting Reply', date:'5 May 2026',
+    note:'Emailed 5 May 2026.' },
+  { terms:['melbourne community home care','chcservices','community home care pty'],
+    status:'awaiting', label:'⏳ Awaiting Reply', date:'5 May 2026',
+    note:'Emailed 5 May 2026.' },
+  { terms:['celas','united-spanish latin','united spanish latin'],
+    status:'awaiting', label:'⏳ Awaiting Reply', date:'5 May 2026',
+    note:'Emailed 5 May 2026.' },
+  { terms:['haiseyhomecare','haisey home care'],
+    status:'awaiting', label:'⏳ Awaiting Reply', date:'5 May 2026',
+    note:'Emailed 5 May 2026.' },
+  { terms:['inclusivehomecare','inclusive home care'],
+    status:'awaiting', label:'⏳ Awaiting Reply', date:'5 May 2026',
+    note:'Emailed 5 May 2026.' },
+  { terms:['moonee valley city council','mvcc.vic.gov'],
+    status:'awaiting', label:'⏳ Awaiting Reply', date:'5 May 2026',
+    note:'Replied 5 May — acknowledged, passed to Care Partners. Awaiting follow-up.' },
 ];
 
 const PILL_CLASS = {
-  'no-capacity':'pill-no-capacity','not-chsp':'pill-not-chsp','need-call':'pill-need-call',
-  'awaiting':'pill-awaiting','bounced':'pill-bounced','not-contacted':'pill-not-contacted','has-capacity':'pill-has-capacity',
+  'no-capacity':   'pill-no-capacity',
+  'not-chsp':      'pill-not-chsp',
+  'need-call':     'pill-need-call',
+  'awaiting':      'pill-awaiting',
+  'bounced':       'pill-bounced',
+  'not-contacted': 'pill-not-contacted',
+  'has-capacity':  'pill-has-capacity',
 };
 
 function getProviderStatus(p) {
@@ -226,7 +301,9 @@ function getProviderStatus(p) {
   for (const rule of MATCH_RULES) {
     for (const term of rule.terms) {
       const t = term.replace(/\s+/g,'');
-      if (combined.includes(t) || combinedSpaced.includes(term)) return rule;
+      if (combined.includes(t) || combinedSpaced.includes(term)) {
+        return rule;
+      }
     }
   }
   return { status:'not-contacted', label:'⬜ Not Contacted', date:'', note:'' };
@@ -237,6 +314,7 @@ function fmtDate(iso) {
   catch { return iso || '—'; }
 }
 
+// ── Tab 1 renderer ────────────────────────────────────────────────────────────
 function renderOverview({ responded, awaiting, not_sent }) {
   const overdue = awaiting.filter(p => p.days_waiting >= 5);
   let html = `<div class="stats-row">
@@ -250,22 +328,32 @@ function renderOverview({ responded, awaiting, not_sent }) {
       <div><div class="stat-number" style="color:#0055cc">${not_sent.length}</div>
       <div class="stat-label">Not Yet Contacted (drafts pending)</div></div></div>
   </div>`;
+
   if (responded.length) {
     html += `<div class="section"><div class="section-header"><span>📬</span>
-      <span class="section-title">Responded</span><span class="badge red">${responded.length}</span></div>
-      <table><thead><tr><th style="width:24%">Provider</th><th style="width:14%">Date</th><th>Outcome / Notes</th></tr></thead><tbody>`;
+      <span class="section-title">Responded</span>
+      <span class="badge red">${responded.length}</span></div>
+      <table><thead><tr>
+        <th style="width:24%">Provider</th><th style="width:14%">Date</th><th>Outcome / Notes</th>
+      </tr></thead><tbody>`;
     for (const p of responded) {
-      html += `<tr><td><span class="provider-name">${p.name}</span></td><td>${fmtDate(p.date_responded)}</td><td><span class="response-text">${p.response}</span></td></tr>`;
+      html += `<tr><td><span class="provider-name">${p.name}</span></td>
+        <td>${fmtDate(p.date_responded)}</td>
+        <td><span class="response-text">${p.response}</span></td></tr>`;
     }
     html += `</tbody></table></div>`;
   }
   if (awaiting.length) {
     html += `<div class="section"><div class="section-header"><span>⏳</span>
-      <span class="section-title">Awaiting Response</span><span class="badge yellow">${awaiting.length}</span></div>
-      <table><thead><tr><th style="width:24%">Provider</th><th style="width:18%">Contacted</th><th>Status</th></tr></thead><tbody>`;
+      <span class="section-title">Awaiting Response</span>
+      <span class="badge yellow">${awaiting.length}</span></div>
+      <table><thead><tr>
+        <th style="width:24%">Provider</th><th style="width:18%">Contacted</th><th>Status</th>
+      </tr></thead><tbody>`;
     for (const p of awaiting) {
       const od = p.days_waiting >= 5;
-      html += `<tr><td><span class="provider-name">${p.name}</span></td><td>${fmtDate(p.date_sent)}</td>
+      html += `<tr><td><span class="provider-name">${p.name}</span></td>
+        <td>${fmtDate(p.date_sent)}</td>
         <td><span class="pill ${od?'pill-no-capacity':'pill-awaiting'}">${od?'⚠️ Overdue':'Waiting'}</span>
         <div class="days-chip ${od?'overdue':''}">${p.days_waiting}d ago</div></td></tr>`;
     }
@@ -273,8 +361,11 @@ function renderOverview({ responded, awaiting, not_sent }) {
   }
   if (not_sent.length) {
     html += `<div class="section"><div class="section-header"><span>📋</span>
-      <span class="section-title">Not Yet Contacted — Drafts Pending</span><span class="badge blue">${not_sent.length}</span></div>
-      <table><thead><tr><th style="width:40%">Provider</th><th>Action Required</th></tr></thead><tbody>`;
+      <span class="section-title">Not Yet Contacted — Drafts Pending</span>
+      <span class="badge blue">${not_sent.length}</span></div>
+      <table><thead><tr>
+        <th style="width:40%">Provider</th><th>Action Required</th>
+      </tr></thead><tbody>`;
     for (const p of not_sent) {
       html += `<tr><td><span class="provider-name">${p.name}</span></td>
         <td>Call <a class="phone-link" href="tel:${p.phone.replace(/\s/g,'')}">${p.phone}</a> for intake email, then send draft</td></tr>`;
@@ -284,132 +375,188 @@ function renderOverview({ responded, awaiting, not_sent }) {
   document.getElementById('root').innerHTML = html;
 }
 
-let currentFilter = 'all', currentSearch = '', currentSort = { col:'lga', dir:1 }, enrichedProviders = [];
+// ── Tab 2 renderer ────────────────────────────────────────────────────────────
+let currentFilter = 'all';
+let currentSearch = '';
+let currentSort   = { col: 'lga', dir: 1 };
+let enrichedProviders = [];
 
 function enrichProviders() {
   enrichedProviders = PROVIDERS.map(p => {
     const s = getProviderStatus(p);
-    return { ...p, status:s.status, statusLabel:s.label, date:s.date, note:s.note };
+    return { ...p, status: s.status, statusLabel: s.label, date: s.date, note: s.note };
   });
 }
 
 function renderList() {
   const container = document.getElementById('listRoot');
+
   let rows = [...enrichedProviders];
+
   if (currentFilter !== 'all') rows = rows.filter(r => r.status === currentFilter);
+
   if (currentSearch) {
     const q = currentSearch.toLowerCase();
-    rows = rows.filter(r => r.name.toLowerCase().includes(q) || r.provider.toLowerCase().includes(q) || r.suburb.toLowerCase().includes(q) || r.lga.toLowerCase().includes(q));
+    rows = rows.filter(r =>
+      r.name.toLowerCase().includes(q) ||
+      r.provider.toLowerCase().includes(q) ||
+      r.suburb.toLowerCase().includes(q) ||
+      r.lga.toLowerCase().includes(q)
+    );
   }
-  rows.sort((a,b) => { const av=(a[currentSort.col]||'').toLowerCase(),bv=(b[currentSort.col]||'').toLowerCase(); return av<bv?-currentSort.dir:av>bv?currentSort.dir:0; });
+
+  rows.sort((a, b) => {
+    const av = (a[currentSort.col] || '').toLowerCase();
+    const bv = (b[currentSort.col] || '').toLowerCase();
+    return av < bv ? -currentSort.dir : av > bv ? currentSort.dir : 0;
+  });
+
   const counts = {};
-  enrichedProviders.forEach(r => { counts[r.status]=(counts[r.status]||0)+1; });
+  enrichedProviders.forEach(r => { counts[r.status] = (counts[r.status]||0)+1; });
   const contacted = enrichedProviders.filter(r => r.date).length;
+
   const filterDefs = [
-    {key:'all',label:'All',count:enrichedProviders.length},
-    {key:'not-contacted',label:'Not Contacted',count:counts['not-contacted']||0},
-    {key:'awaiting',label:'Awaiting Reply',count:counts['awaiting']||0},
-    {key:'need-call',label:'Need to Call',count:counts['need-call']||0},
-    {key:'bounced',label:'Bounced',count:counts['bounced']||0},
-    {key:'not-chsp',label:'Not CHSP',count:counts['not-chsp']||0},
-    {key:'no-capacity',label:'No Capacity',count:counts['no-capacity']||0},
-    {key:'has-capacity',label:'Has Capacity ✅',count:counts['has-capacity']||0},
+    { key:'all',           label:'All',              count: enrichedProviders.length },
+    { key:'not-contacted', label:'Not Contacted',    count: counts['not-contacted']||0 },
+    { key:'awaiting',      label:'Awaiting Reply',   count: counts['awaiting']||0 },
+    { key:'need-call',     label:'Need to Call',     count: counts['need-call']||0 },
+    { key:'bounced',       label:'Bounced',          count: counts['bounced']||0 },
+    { key:'not-chsp',      label:'Not CHSP',         count: counts['not-chsp']||0 },
+    { key:'no-capacity',   label:'No Capacity',      count: counts['no-capacity']||0 },
+    { key:'has-capacity',  label:'Has Capacity ✅',  count: counts['has-capacity']||0 },
   ];
-  const chips = filterDefs.map(f => `<button class="chip${currentFilter===f.key?' active':''}" onclick="setFilter('${f.key}')">${f.label} <b>${f.count}</b></button>`).join('');
-  const sortArrow = col => currentSort.col!==col?'<span class="sort-arrow">↕</span>':`<span class="sort-arrow">${currentSort.dir===1?'↑':'↓'}</span>`;
-  let tableRows = rows.length===0
-    ? `<tr><td colspan="6"><div class="empty-msg">No providers match this filter.</div></td></tr>`
-    : rows.map((r,i) => `<tr>
+
+  const chips = filterDefs.map(f =>
+    `<button class="chip${currentFilter===f.key?' active':''}" onclick="setFilter('${f.key}')">${f.label} <b>${f.count}</b></button>`
+  ).join('');
+
+  const sortArrow = (col) => {
+    if (currentSort.col !== col) return '<span class="sort-arrow">↕</span>';
+    return `<span class="sort-arrow">${currentSort.dir===1?'↑':'↓'}</span>`;
+  };
+
+  let tableRows = '';
+  if (rows.length === 0) {
+    tableRows = `<tr><td colspan="6"><div class="empty-msg">No providers match this filter.</div></td></tr>`;
+  } else {
+    rows.forEach((r, i) => {
+      tableRows += `<tr>
         <td style="color:#aaa;font-size:11px;width:36px">${i+1}</td>
-        <td><div class="provider-name">${r.name}</div><div class="provider-sub">${r.provider}</div></td>
-        <td><div>${r.suburb}</div><div class="provider-sub">${r.lga} · ${r.postcode}</div></td>
+        <td>
+          <div class="provider-name">${r.name}</div>
+          <div class="provider-sub">${r.provider}</div>
+        </td>
+        <td>
+          <div>${r.suburb}</div>
+          <div class="provider-sub">${r.lga} · ${r.postcode}</div>
+        </td>
         <td><span class="pill ${PILL_CLASS[r.status]||'pill-not-contacted'}">${r.statusLabel}</span></td>
         <td style="font-size:12px;color:#6e6e73">${r.date||'—'}</td>
         <td style="font-size:12px;color:#3a3a3c;max-width:260px">${r.note||''}</td>
-      </tr>`).join('');
+      </tr>`;
+    });
+  }
+
   container.innerHTML = `
     <div class="list-toolbar">
-      <input class="search-input" type="text" placeholder="Search name, provider, suburb…" value="${currentSearch}" oninput="setSearch(this.value)">
+      <input class="search-input" type="text" placeholder="Search name, provider, suburb…"
+        value="${currentSearch}" oninput="setSearch(this.value)">
       <div class="filter-chips">${chips}</div>
     </div>
     <div style="font-size:12px;color:#6e6e73;margin-bottom:12px">
       Showing <b>${rows.length}</b> of ${enrichedProviders.length} providers &nbsp;·&nbsp;
-      <b>${contacted}</b> contacted &nbsp;·&nbsp; <b>${enrichedProviders.length-contacted}</b> not yet contacted
+      <b>${contacted}</b> contacted &nbsp;·&nbsp;
+      <b>${enrichedProviders.length - contacted}</b> not yet contacted
     </div>
-    <div class="section"><table>
-      <thead><tr>
-        <th style="width:36px">#</th>
-        <th onclick="setSort('name')" class="${currentSort.col==='name'?'sorted':''}">Service / Provider ${sortArrow('name')}</th>
-        <th onclick="setSort('suburb')" class="${currentSort.col==='suburb'?'sorted':''}">Suburb / LGA ${sortArrow('suburb')}</th>
-        <th onclick="setSort('status')" class="${currentSort.col==='status'?'sorted':''}">Status ${sortArrow('status')}</th>
-        <th onclick="setSort('date')" class="${currentSort.col==='date'?'sorted':''}">Date Contacted ${sortArrow('date')}</th>
-        <th>Notes</th>
-      </tr></thead>
-      <tbody>${tableRows}</tbody>
-    </table></div>`;
+    <div class="section">
+      <table>
+        <thead><tr>
+          <th style="width:36px">#</th>
+          <th onclick="setSort('name')" class="${currentSort.col==='name'?'sorted':''}">Service / Provider ${sortArrow('name')}</th>
+          <th onclick="setSort('suburb')" class="${currentSort.col==='suburb'?'sorted':''}">Suburb / LGA ${sortArrow('suburb')}</th>
+          <th onclick="setSort('status')" class="${currentSort.col==='status'?'sorted':''}">Status ${sortArrow('status')}</th>
+          <th onclick="setSort('date')" class="${currentSort.col==='date'?'sorted':''}">Date Contacted ${sortArrow('date')}</th>
+          <th>Notes</th>
+        </tr></thead>
+        <tbody>${tableRows}</tbody>
+      </table>
+    </div>`;
 }
 
-function setFilter(f) { currentFilter=f; renderList(); }
-function setSearch(v) { currentSearch=v; renderList(); }
-function setSort(col) { if(currentSort.col===col) currentSort.dir*=-1; else{currentSort.col=col;currentSort.dir=1;} renderList(); }
+function setFilter(f) { currentFilter = f; renderList(); }
+function setSearch(v) { currentSearch = v; renderList(); }
+function setSort(col) {
+  if (currentSort.col === col) currentSort.dir *= -1;
+  else { currentSort.col = col; currentSort.dir = 1; }
+  renderList();
+}
 
+// ── Tab switching ─────────────────────────────────────────────────────────────
 let activeTab = 1;
 function showTab(n) {
-  activeTab=n;
-  document.getElementById('tab1').style.display=n===1?'':'none';
-  document.getElementById('tab2').style.display=n===2?'':'none';
-  document.getElementById('tabBtn1').className='tab-btn'+(n===1?' active':'');
-  document.getElementById('tabBtn2').className='tab-btn'+(n===2?' active':'');
-  if(n===2 && enrichedProviders.length>0) renderList();
+  activeTab = n;
+  document.getElementById('tab1').style.display = n===1 ? '' : 'none';
+  document.getElementById('tab2').style.display = n===2 ? '' : 'none';
+  document.getElementById('tabBtn1').className = 'tab-btn' + (n===1?' active':'');
+  document.getElementById('tabBtn2').className = 'tab-btn' + (n===2?' active':'');
+  if (n===2 && enrichedProviders.length > 0) renderList();
 }
 
-const SNAPSHOT_DATE = '14 May 2026';
+// ── Static data loader (no external calls) ───────────────────────────────────
+const SNAPSHOT_DATE = '15 May 2026';
 
 function loadData() {
+  // Baked-in outreach status as of snapshot date
   const data = {
     responded: [
-      { name:'IPC Health', date_responded:'2026-05-01', response:'❌ No capacity — cannot accept new referrals (Carol Segran).' },
-      { name:'HammondCare', date_responded:'2026-04-30', response:'❌ No capacity — overcapacity for domestic assistance under CHSP.' },
-      { name:'MecWaCare', date_responded:'2026-04-30', response:'❌ No capacity — not funded for home maintenance in Delahey; no DA capacity.' },
-      { name:'Silverchain', date_responded:'2026-05-03', response:'❌ No capacity — CHSP team confirmed no capacity in Delahey area.' },
-      { name:'Doutta Galla Aged Services', date_responded:'2026-05-06', response:'❌ No capacity — Nancy placed on long waitlist (Trudy Grima, Community Coordinator).' },
-      { name:'Australian Multicultural Community Services', date_responded:'2026-05-06', response:'❌ No capacity — no DA or Home Maintenance capacity in west Melbourne.' },
-      { name:'Care Connect', date_responded:'2026-05-05', response:'❌ No capacity — full for Domestic Assistance and Home Maintenance under CHSP.' },
-      { name:'Pearl Home Care', date_responded:'2026-05-05', response:'❌ No capacity — unable to support CHSP clients; no funding allocation for these categories.' },
-      { name:'Baptcare', date_responded:'2026-05-06', response:'❌ No capacity — no CHSP capacity at this time.' },
-      { name:'Filipino CACP / FCCVI', date_responded:'2026-05-06', response:'❌ No capacity — CHSP/SAH provider but does not offer DA or Home Maintenance (Ann Suan).' },
-      { name:'HenderCare', date_responded:'2026-04-30', response:'🚫 Not CHSP — not open for CHSP referrals in VIC (Simon Kent).' },
-      { name:'Esse Care', date_responded:'2026-05-03', response:'🚫 Not CHSP — confirmed not a CHSP provider (Melissa Yang, Intake).' },
-      { name:'Salvation Army', date_responded:'2026-05-04', response:'🚫 Not CHSP — do not provide CHSP services in Victoria.' },
-      { name:'Supreme Care', date_responded:'2026-05-05', response:'🚫 Not CHSP — not registered for CHSP; Support at Home provider only.' },
-      { name:'My Home Care Choices', date_responded:'2026-05-05', response:'🚫 Not CHSP — SAH provider only, not a CHSP provider (Ibrahim M, MHCC).' },
-      { name:'BrightCare Support', date_responded:'2026-05-06', response:'🚫 Not CHSP — do not provide services under CHSP.' },
-      { name:'Empower Home Care', date_responded:'2026-05-06', response:'🚫 Not CHSP — home care provider only; do not deliver CHSP services.' },
-      { name:'Benetas', date_responded:'2026-05-04', response:'📞 Need to call — call CHSP team on 1300 788 338 to check Delahey capacity. No DA offered directly.' },
-      { name:'Moonee Valley City Council', date_responded:'2026-05-05', response:'🟡 Acknowledged — passed to Care Partners who will be in contact. Awaiting follow-up.' },
-      { name:'Uniting AgeWell', date_responded:'2026-05-03', response:'📧 Bounced — mcrenquiries@unitingagewell.org not delivered. Correct address needed.' },
-      { name:"Jim's Home Care", date_responded:'2026-05-05', response:'📧 Bounced — james@jimshomecare.com.au not delivered. Correct address needed.' },
-      { name:'Sunbury Community Health', date_responded:'2026-05-05', response:'📧 Bounced — intake@sunburycobaw.org.au not delivered. Correct address needed.' },
-      { name:'Spectrum Migrant Resource Centre', date_responded:'2026-05-05', response:'📧 Bounced — sis.referrals@spectrumvic.org.au not delivered. Correct address needed.' },
+      // ── No capacity ───────────────────────────────────────────────────────
+      { name: 'IPC Health',             date_responded: '2026-05-01', response: '❌ No capacity — cannot accept new referrals (Carol Segran).' },
+      { name: 'HammondCare',            date_responded: '2026-04-30', response: '❌ No capacity — overcapacity for domestic assistance under CHSP.' },
+      { name: 'MecWaCare',              date_responded: '2026-04-30', response: '❌ No capacity — not funded for home maintenance in Delahey; no DA capacity.' },
+      { name: 'Silverchain',            date_responded: '2026-05-03', response: '❌ No capacity — CHSP team confirmed no capacity in Delahey area.' },
+      { name: 'Doutta Galla Aged Services', date_responded: '2026-05-06', response: '❌ No capacity — Nancy placed on long waitlist (Trudy Grima, Community Coordinator).' },
+      { name: 'Australian Multicultural Community Services', date_responded: '2026-05-06', response: '❌ No capacity — no DA or Home Maintenance capacity in west Melbourne.' },
+      { name: 'Care Connect',           date_responded: '2026-05-05', response: '❌ No capacity — full for Domestic Assistance and Home Maintenance under CHSP.' },
+      { name: 'Pearl Home Care',        date_responded: '2026-05-05', response: '❌ No capacity — unable to support CHSP clients; no funding allocation for these categories.' },
+      { name: 'Baptcare',               date_responded: '2026-05-06', response: '❌ No capacity — no CHSP capacity at this time.' },
+      { name: 'Filipino CACP / FCCVI',  date_responded: '2026-05-06', response: '❌ No capacity — CHSP/SAH provider but does not offer DA or Home Maintenance (Ann Suan).' },
+      // ── Not CHSP ─────────────────────────────────────────────────────────
+      { name: 'HenderCare',             date_responded: '2026-04-30', response: '🚫 Not CHSP — not open for CHSP referrals in VIC (Simon Kent).' },
+      { name: 'Esse Care',              date_responded: '2026-05-03', response: '🚫 Not CHSP — confirmed not a CHSP provider (Melissa Yang, Intake).' },
+      { name: 'Salvation Army',         date_responded: '2026-05-04', response: '🚫 Not CHSP — do not provide CHSP services in Victoria.' },
+      { name: 'Supreme Care',           date_responded: '2026-05-05', response: '🚫 Not CHSP — not registered for CHSP; Support at Home provider only.' },
+      { name: 'My Home Care Choices',   date_responded: '2026-05-05', response: '🚫 Not CHSP — SAH provider only, not a CHSP provider (Ibrahim M, MHCC).' },
+      { name: 'BrightCare Support',     date_responded: '2026-05-06', response: '🚫 Not CHSP — do not provide services under CHSP.' },
+      { name: 'Empower Home Care',      date_responded: '2026-05-06', response: '🚫 Not CHSP — home care provider only; do not deliver CHSP services.' },
+      // ── Need to call ─────────────────────────────────────────────────────
+      { name: 'Benetas',                date_responded: '2026-05-04', response: '📞 Need to call — call CHSP team on 1300 788 338 to check Delahey capacity. No DA offered directly.' },
+      // ── Acknowledged / pending ────────────────────────────────────────────
+      { name: 'Moonee Valley City Council', date_responded: '2026-05-05', response: '🟡 Acknowledged — passed to Care Partners who will be in contact. Awaiting follow-up.' },
+      // ── Bounced ──────────────────────────────────────────────────────────
+      { name: 'Uniting AgeWell',        date_responded: '2026-05-03', response: '📧 Bounced — mcrenquiries@unitingagewell.org not delivered. Correct address needed.' },
+      { name: "Jim's Home Care",        date_responded: '2026-05-05', response: '📧 Bounced — james@jimshomecare.com.au not delivered. Correct address needed.' },
+      { name: 'Sunbury Community Health', date_responded: '2026-05-05', response: '📧 Bounced — intake@sunburycobaw.org.au not delivered. Correct address needed.' },
+      { name: 'Spectrum Migrant Resource Centre', date_responded: '2026-05-05', response: '📧 Bounced — sis.referrals@spectrumvic.org.au not delivered. Correct address needed.' },
     ],
     awaiting: [
-      { name:'People First Healthcare', date_sent:'2026-04-30', days_waiting:7 },
-      { name:'Victorian Arabic Social Services', date_sent:'2026-05-05', days_waiting:2 },
-      { name:'Comfort Care Group', date_sent:'2026-05-05', days_waiting:2 },
-      { name:'Miracle Health Services', date_sent:'2026-05-05', days_waiting:2 },
-      { name:'Just Better Care Melbourne West', date_sent:'2026-05-05', days_waiting:2 },
-      { name:'Melbourne Community Home Care', date_sent:'2026-05-05', days_waiting:2 },
-      { name:'CELAS / United Spanish Welfare', date_sent:'2026-05-05', days_waiting:2 },
-      { name:'Haisey Home Care', date_sent:'2026-05-05', days_waiting:2 },
-      { name:'Inclusive Home Care', date_sent:'2026-05-05', days_waiting:2 },
+      { name: 'People First Healthcare',          date_sent: '2026-04-30', days_waiting: 7 },
+      { name: 'Victorian Arabic Social Services', date_sent: '2026-05-05', days_waiting: 2 },
+      { name: 'Comfort Care Group',               date_sent: '2026-05-05', days_waiting: 2 },
+      { name: 'Miracle Health Services',          date_sent: '2026-05-05', days_waiting: 2 },
+      { name: 'Just Better Care Melbourne West',  date_sent: '2026-05-05', days_waiting: 2 },
+      { name: 'Melbourne Community Home Care',    date_sent: '2026-05-05', days_waiting: 2 },
+      { name: 'CELAS / United Spanish Welfare',   date_sent: '2026-05-05', days_waiting: 2 },
+      { name: 'Haisey Home Care',                 date_sent: '2026-05-05', days_waiting: 2 },
+      { name: 'Inclusive Home Care',              date_sent: '2026-05-05', days_waiting: 2 },
     ],
     not_sent: [
-      { name:'Essential Care Victoria', phone:'7074 3740' },
-      { name:'Bolton Clarke Western Metro Melbourne', phone:'1300 334 455' },
-      { name:'Multicap Melbourne', phone:'1300 245 516' },
-      { name:'Uniting AgeWell Melbourne West Metro', phone:'9111 9593' },
+      { name: 'Essential Care Victoria',              phone: '7074 3740' },
+      { name: 'Bolton Clarke Western Metro Melbourne', phone: '1300 334 455' },
+      { name: 'Multicap Melbourne',                   phone: '1300 245 516' },
+      { name: 'Uniting AgeWell Melbourne West Metro', phone: '9111 9593' },
     ]
   };
+
   renderOverview(data);
   enrichProviders();
   document.getElementById('totalCount').textContent = enrichedProviders.length;
