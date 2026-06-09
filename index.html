@@ -107,13 +107,14 @@
     display: inline-block; font-size: 11px; font-weight: 600;
     border-radius: 6px; padding: 2px 8px; white-space: nowrap;
   }
-  .pill-no-capacity  { background: #fff0f0; color: #c0392b; }
-  .pill-not-chsp     { background: #fef3e2; color: #b06000; }
-  .pill-need-call    { background: #fffbe6; color: #7d6608; }
-  .pill-awaiting     { background: #e8f0fe; color: #0055cc; }
-  .pill-bounced      { background: #f9ebea; color: #922b21; }
-  .pill-not-contacted{ background: #f2f3f4; color: #5a5a5a; }
-  .pill-has-capacity { background: #eafaf1; color: #1e8449; }
+  .pill-no-capacity     { background: #fff0f0; color: #c0392b; }
+  .pill-not-chsp        { background: #fef3e2; color: #b06000; }
+  .pill-need-call       { background: #fffbe6; color: #7d6608; }
+  .pill-awaiting        { background: #e8f0fe; color: #0055cc; }
+  .pill-bounced         { background: #f9ebea; color: #922b21; }
+  .pill-not-contacted   { background: #f2f3f4; color: #5a5a5a; }
+  .pill-has-capacity    { background: #eafaf1; color: #1e8449; }
+  .pill-followup-sent   { background: #f0e6ff; color: #6320b0; }
 
   .days-chip {
     font-size: 11px; background: #f5f5f7; border-radius: 6px;
@@ -184,35 +185,35 @@ const PROVIDERS = [{"name":"Filipino CACP Program","provider":"Filipino Communit
 const MATCH_RULES = [
   // ── No Capacity ──────────────────────────────────────────────────────────────
   { terms:['ipchealth','ipc health','ipc health ltd'],
-    status:'no-capacity', label:'❌ No Capacity', date:'1 May 2026',
-    note:'At capacity — cannot accept new referrals (Carol Segran).' },
+    status:'followup-sent', label:'📨 Follow-up Sent', date:'9 Jun 2026',
+    note:'Follow-up sent 9 Jun 2026. Initial: at capacity (Carol Segran, 1 May 2026).' },
   { terms:['hammondcare','hammond care'],
-    status:'no-capacity', label:'❌ No Capacity', date:'30 Apr 2026',
-    note:'Overcapacity for domestic assistance under CHSP.' },
+    status:'followup-sent', label:'📨 Follow-up Sent', date:'9 Jun 2026',
+    note:'Follow-up sent 9 Jun 2026. Initial: overcapacity for DA under CHSP (30 Apr 2026).' },
   { terms:['mecwacare','mecwa'],
     status:'no-capacity', label:'❌ No Capacity', date:'30 Apr 2026',
     note:'Not funded for home maintenance in Delahey; no DA capacity.' },
   { terms:['silverchain'],
-    status:'no-capacity', label:'❌ No Capacity', date:'3 May 2026',
-    note:'No capacity in Delahey area — CHSP team confirmed.' },
+    status:'followup-sent', label:'📨 Follow-up Sent', date:'9 Jun 2026',
+    note:'Follow-up sent 9 Jun 2026. Initial: no capacity in Delahey (3 May 2026).' },
   { terms:['doutta galla','doutta galla aged'],
-    status:'no-capacity', label:'❌ No Capacity', date:'6 May 2026',
-    note:'At capacity — Nancy placed on long waitlist (Trudy Grima, Community Coordinator).' },
+    status:'followup-sent', label:'📨 Follow-up Sent', date:'9 Jun 2026',
+    note:'Follow-up sent 9 Jun 2026. Initial: at capacity, waitlisted (Trudy Grima, 6 May 2026).' },
   { terms:['australian multicultural community services','amcservices'],
-    status:'no-capacity', label:'❌ No Capacity', date:'6 May 2026',
-    note:'No capacity in west Melbourne for Domestic Assistance and Home Maintenance.' },
+    status:'followup-sent', label:'📨 Follow-up Sent', date:'9 Jun 2026',
+    note:'Follow-up sent 9 Jun 2026. Initial: no capacity for DA/HM in west Melbourne (6 May 2026).' },
   { terms:['careconnect','care connect'],
-    status:'no-capacity', label:'❌ No Capacity', date:'5 May 2026',
-    note:'Full capacity for Domestic Assistance and Home Maintenance under CHSP.' },
+    status:'followup-sent', label:'📨 Follow-up Sent', date:'9 Jun 2026',
+    note:'Follow-up sent 9 Jun 2026. Initial: full capacity for DA/HM under CHSP (5 May 2026).' },
   { terms:['pearlhomecare','pearl home care'],
     status:'no-capacity', label:'❌ No Capacity', date:'5 May 2026',
-    note:'Unable to support CHSP clients — no funding allocation for these categories.' },
+    note:'Unable to support CHSP clients — no funding allocation for these categories. Structural barrier.' },
   { terms:['baptcare'],
-    status:'no-capacity', label:'❌ No Capacity', date:'6 May 2026',
-    note:'No capacity for CHSP services at this time.' },
+    status:'followup-sent', label:'📨 Follow-up Sent', date:'9 Jun 2026',
+    note:'Follow-up sent 9 Jun 2026. Initial: no capacity for CHSP services (6 May 2026).' },
   { terms:['filipinocommunitycouncil','fccvi','filipino cacp','filipino community council'],
     status:'no-capacity', label:'❌ No Capacity', date:'6 May 2026',
-    note:'CHSP/SAH provider but does not offer DA or Home Maintenance (Ann Suan, FCCVI).' },
+    note:'Does not offer DA or Home Maintenance (Ann Suan, FCCVI). Structural barrier — no follow-up.' },
   // ── Not CHSP ─────────────────────────────────────────────────────────────────
   { terms:['hendercare'],
     status:'not-chsp', label:'🚫 Not CHSP', date:'30 Apr 2026',
@@ -286,13 +287,14 @@ const MATCH_RULES = [
 ];
 
 const PILL_CLASS = {
-  'no-capacity':   'pill-no-capacity',
-  'not-chsp':      'pill-not-chsp',
-  'need-call':     'pill-need-call',
-  'awaiting':      'pill-awaiting',
-  'bounced':       'pill-bounced',
-  'not-contacted': 'pill-not-contacted',
-  'has-capacity':  'pill-has-capacity',
+  'no-capacity':    'pill-no-capacity',
+  'not-chsp':       'pill-not-chsp',
+  'need-call':      'pill-need-call',
+  'awaiting':       'pill-awaiting',
+  'bounced':        'pill-bounced',
+  'not-contacted':  'pill-not-contacted',
+  'has-capacity':   'pill-has-capacity',
+  'followup-sent':  'pill-followup-sent',
 };
 
 function getProviderStatus(p) {
@@ -315,18 +317,22 @@ function fmtDate(iso) {
 }
 
 // ── Tab 1 renderer ────────────────────────────────────────────────────────────
-function renderOverview({ responded, awaiting, not_sent }) {
+function renderOverview({ responded, awaiting, not_sent, followup_sent }) {
+  followup_sent = followup_sent || [];
   const overdue = awaiting.filter(p => p.days_waiting >= 5);
-  let html = `<div class="stats-row">
+  let html = `<div class="stats-row" style="grid-template-columns:repeat(4,1fr)">
     <div class="stat-card"><div class="stat-icon red">📬</div>
       <div><div class="stat-number" style="color:#d93025">${responded.length}</div>
       <div class="stat-label">Responded</div></div></div>
     <div class="stat-card"><div class="stat-icon yellow">⏳</div>
       <div><div class="stat-number" style="color:#b06000">${awaiting.length}</div>
       <div class="stat-label">Awaiting Response${overdue.length ? ` <span style="color:#d93025">(${overdue.length} overdue)</span>`:''}</div></div></div>
+    <div class="stat-card"><div class="stat-icon" style="background:#f3eaff">📨</div>
+      <div><div class="stat-number" style="color:#6320b0">${followup_sent.length}</div>
+      <div class="stat-label">Follow-up Sent</div></div></div>
     <div class="stat-card"><div class="stat-icon blue">📋</div>
       <div><div class="stat-number" style="color:#0055cc">${not_sent.length}</div>
-      <div class="stat-label">Not Yet Contacted (drafts pending)</div></div></div>
+      <div class="stat-label">Not Yet Contacted</div></div></div>
   </div>`;
 
   if (responded.length) {
@@ -340,6 +346,21 @@ function renderOverview({ responded, awaiting, not_sent }) {
       html += `<tr><td><span class="provider-name">${p.name}</span></td>
         <td>${fmtDate(p.date_responded)}</td>
         <td><span class="response-text">${p.response}</span></td></tr>`;
+    }
+    html += `</tbody></table></div>`;
+  }
+  if (followup_sent.length) {
+    html += `<div class="section"><div class="section-header"><span>📨</span>
+      <span class="section-title">Follow-up Sent — Awaiting Response</span>
+      <span class="badge" style="background:#f0e6ff;color:#6320b0">${followup_sent.length}</span></div>
+      <table><thead><tr>
+        <th style="width:28%">Provider</th><th style="width:16%">Follow-up Sent</th><th style="width:18%">Initial Contact</th><th>Contact</th>
+      </tr></thead><tbody>`;
+    for (const p of followup_sent) {
+      html += `<tr><td><span class="provider-name">${p.name}</span></td>
+        <td>${fmtDate(p.date_sent)}</td>
+        <td>${p.initial_contact}</td>
+        <td><span class="response-text">${p.contact}</span></td></tr>`;
     }
     html += `</tbody></table></div>`;
   }
@@ -417,13 +438,14 @@ function renderList() {
 
   const filterDefs = [
     { key:'all',           label:'All',              count: enrichedProviders.length },
-    { key:'not-contacted', label:'Not Contacted',    count: counts['not-contacted']||0 },
-    { key:'awaiting',      label:'Awaiting Reply',   count: counts['awaiting']||0 },
-    { key:'need-call',     label:'Need to Call',     count: counts['need-call']||0 },
-    { key:'bounced',       label:'Bounced',          count: counts['bounced']||0 },
-    { key:'not-chsp',      label:'Not CHSP',         count: counts['not-chsp']||0 },
-    { key:'no-capacity',   label:'No Capacity',      count: counts['no-capacity']||0 },
-    { key:'has-capacity',  label:'Has Capacity ✅',  count: counts['has-capacity']||0 },
+    { key:'not-contacted',  label:'Not Contacted',    count: counts['not-contacted']||0 },
+    { key:'awaiting',       label:'Awaiting Reply',   count: counts['awaiting']||0 },
+    { key:'need-call',      label:'Need to Call',     count: counts['need-call']||0 },
+    { key:'bounced',        label:'Bounced',          count: counts['bounced']||0 },
+    { key:'not-chsp',       label:'Not CHSP',         count: counts['not-chsp']||0 },
+    { key:'no-capacity',    label:'No Capacity',      count: counts['no-capacity']||0 },
+    { key:'followup-sent',  label:'Follow-up Sent',   count: counts['followup-sent']||0 },
+    { key:'has-capacity',   label:'Has Capacity ✅',  count: counts['has-capacity']||0 },
   ];
 
   const chips = filterDefs.map(f =>
@@ -503,7 +525,7 @@ function showTab(n) {
 }
 
 // ── Static data loader (no external calls) ───────────────────────────────────
-const SNAPSHOT_DATE = '9 June 2026';
+const SNAPSHOT_DATE = '10 June 2026';
 
 function loadData() {
   // Baked-in outreach status as of snapshot date
@@ -554,6 +576,15 @@ function loadData() {
       { name: 'Bolton Clarke Western Metro Melbourne', phone: '1300 334 455' },
       { name: 'Multicap Melbourne',                   phone: '1300 245 516' },
       { name: 'Uniting AgeWell Melbourne West Metro', phone: '9111 9593' },
+    ],
+    followup_sent: [
+      { name: 'IPC Health Ltd',                              date_sent: '2026-06-09', initial_contact: '1 May 2026',  contact: 'Carol Segran' },
+      { name: 'HammondCare At Home Western Melbourne',       date_sent: '2026-06-09', initial_contact: '30 Apr 2026', contact: 'CHSP team' },
+      { name: 'Silverchain Western Melbourne',               date_sent: '2026-06-09', initial_contact: '3 May 2026',  contact: 'CHSP team' },
+      { name: 'Doutta Galla Aged Services',                  date_sent: '2026-06-09', initial_contact: '6 May 2026',  contact: 'Trudy Grima' },
+      { name: 'Australian Multicultural Community Services', date_sent: '2026-06-09', initial_contact: '6 May 2026',  contact: '—' },
+      { name: 'Care Connect',                                date_sent: '2026-06-09', initial_contact: '5 May 2026',  contact: '—' },
+      { name: 'Baptcare Western',                            date_sent: '2026-06-09', initial_contact: '6 May 2026',  contact: '—' },
     ]
   };
 
